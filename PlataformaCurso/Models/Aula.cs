@@ -1,4 +1,6 @@
-﻿namespace PlataformaCurso.Models
+﻿using System.Text.Json.Serialization;
+
+namespace PlataformaCurso.Models
 {
     public class Aula
     {
@@ -16,8 +18,9 @@
 
         public string Professor { get; set; } = string.Empty;
 
-        public Curso Curso { get; set; } = null!;
-
-
+        // Navegação para o lado "1". Fica fora do JSON para evitar ciclo
+        // (Curso -> Aulas -> Curso) e para o cliente enviar só o CursoId.
+        [JsonIgnore]
+        public Curso? Curso { get; set; }
     }
 }
